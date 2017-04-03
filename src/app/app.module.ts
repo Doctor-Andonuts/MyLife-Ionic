@@ -6,6 +6,7 @@ import { CreateTrackerPage } from '../pages/create-tracker/create-tracker';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CreateTrackerPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
