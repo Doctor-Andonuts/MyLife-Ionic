@@ -12,18 +12,19 @@ import { NavController, ViewController } from 'ionic-angular';
   templateUrl: 'create-tracker.html'
 })
 export class CreateTrackerPage {
+  createTracker = {}
 
   constructor(
     public navCtrl: NavController,
     public viewCtrl: ViewController
   ) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CreateTrackerPage');
-  }
-
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  submitForm() {
+    console.log(this.createTracker)
   }
 
 }

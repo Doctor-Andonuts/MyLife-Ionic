@@ -14,36 +14,35 @@
       </button>
     </ion-buttons>
   </ion-navbar>
+
 </ion-header>
 
 
 <ion-content padding>
-  <ion-item>
-    <ion-label>Name</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
+  <form (ngSubmit)="submitForm()">
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input [(ngModel)]="createTracker.name" name="name" type="text"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>Type</ion-label>
-    <ion-select [(ngModel)]="type">
-      <ion-option value="number">Number</ion-option>
-      <ion-option value="text">Text</ion-option>
-      <ion-option value="yesNo">Yes/No</ion-option>
-      <ion-option value="duration">Duration</ion-option>
-      <ion-option value="choice">Choice</ion-option>
-      <ion-option value="marker">Marker</ion-option>
-      <ion-option value="multi">Multi Value</ion-option>
-    </ion-select>
-  </ion-item>
+    <ion-item>
+      <ion-label>Type</ion-label>
+      <ion-select [(ngModel)]="createTracker.type" name="type">
+        <ion-option value="number">Number</ion-option>
+        <ion-option value="text">Text</ion-option>
+        <ion-option value="yesNo">Yes/No</ion-option>
+        <ion-option value="duration">Duration</ion-option>
+        <ion-option value="choice">Choice</ion-option>
+        <ion-option value="marker">Marker</ion-option>
+        <ion-option value="multi">Multi Value</ion-option>
+      </ion-select>
+    </ion-item>
 
-  <ion-item>
-    <ion-label >Label</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label>Label</ion-label>
+      <ion-input [(ngModel)]="createTracker.label" name="label" type="text"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>Name</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
-
+    <button ion-button type="submit" block>Add Todo</button>
+  </form>
 </ion-content>
