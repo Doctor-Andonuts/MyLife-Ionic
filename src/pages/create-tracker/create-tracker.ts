@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, ViewController } from 'ionic-angular';
 
 /*
@@ -12,12 +13,19 @@ import { NavController, ViewController } from 'ionic-angular';
   templateUrl: 'create-tracker.html'
 })
 export class CreateTrackerPage {
-  createTracker = {}
+  private createTracker : FormGroup;
 
   constructor(
     public navCtrl: NavController,
-    public viewCtrl: ViewController
-  ) {}
+    public viewCtrl: ViewController,
+    private formBuilder: FormBuilder
+  ) {
+    this.createTracker = this.formBuilder.group({
+      name: ['', Validators.required],
+      type: ['', Validators.required],
+      label: ['', Validators.required]
+    });
+  }
 
   dismiss() {
     this.viewCtrl.dismiss();

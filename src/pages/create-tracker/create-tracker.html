@@ -19,15 +19,16 @@
 
 
 <ion-content padding>
-  <form (ngSubmit)="submitForm()">
+
+  <form [formGroup]="createTracker" (ngSubmit)="submitForm()">
     <ion-item>
       <ion-label>Name</ion-label>
-      <ion-input [(ngModel)]="createTracker.name" name="name" type="text"></ion-input>
+      <ion-input formControlName="name" type="text"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Type</ion-label>
-      <ion-select [(ngModel)]="createTracker.type" name="type">
+      <ion-select formControlName="type">
         <ion-option value="number">Number</ion-option>
         <ion-option value="text">Text</ion-option>
         <ion-option value="yesNo">Yes/No</ion-option>
@@ -40,9 +41,9 @@
 
     <ion-item>
       <ion-label>Label</ion-label>
-      <ion-input [(ngModel)]="createTracker.label" name="label" type="text"></ion-input>
+      <ion-input formControlName="label" type="text"></ion-input>
     </ion-item>
 
-    <button ion-button type="submit" block>Add Todo</button>
+    <button ion-button type="submit" [disabled]="!createTracker.valid">Create Tracker</button>
   </form>
 </ion-content>
