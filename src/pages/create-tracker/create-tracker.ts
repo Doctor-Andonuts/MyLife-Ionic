@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, ViewController } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 
 /*
   Generated class for the CreateTracker page.
@@ -18,7 +17,6 @@ export class CreateTrackerPage {
   tracker: any;
 
   constructor(
-    storage: Storage,
     public navCtrl: NavController,
     public viewCtrl: ViewController,
     private formBuilder: FormBuilder
@@ -35,13 +33,12 @@ export class CreateTrackerPage {
   }
 
   submitForm() {
-    console.log(this.createTracker.value)
-    tracker.name = this.createTracker.value.name
-    tracker.label = this.createTracker.value.label
-    tracker.type = this.createTracker.value.type
+    this.tracker = {
+      "name": this.createTracker.value.name,
+      "label": this.createTracker.value.label,
+      "type": this.createTracker.value.type };
 
-    storage.ready().then(() => {
-      storage.set('trackerMeta', tracker);
-    });
+    this.viewCtrl.dismiss(this.tracker);
+
   }
 }
