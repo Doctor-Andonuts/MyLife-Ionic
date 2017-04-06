@@ -8,8 +8,11 @@
 
 <ion-content padding>
 
-  <p>Driver: {{driver}}</p>
-  <p>All: {{storageInfo}}</p>
+  <ion-list>
+    <button ion-item *ngFor="let tracker of trackers">
+      {{ tracker.name }}
+    </button>
+  </ion-list>
 
   <ion-fab right bottom>
     <button ion-fab color="primary" (click)="createTracker()"><ion-icon name="add"></ion-icon></button>

@@ -11,8 +11,7 @@ import { UUID } from 'angular2-uuid';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  driver: any;
-  storageInfo: any;
+  trackers: any[];
   myStorage: any;
 
   constructor(
@@ -21,18 +20,10 @@ export class HomePage {
     storage: Storage
   ) {
     this.myStorage = storage;
+    
     console.log("==========START==============");
 
-    storage.ready().then(() => {
-      storage.get("trackerMeta").then((trackerMeta) => {
-        if( trackerMeta == undefined) {
-          storage.set("trackerMeta", {});
-        } else {
-          console.log(trackerMeta);
-        }
-      });
-    });
-
+    this.loadList();
   }
 
   createTracker() {
@@ -42,11 +33,27 @@ export class HomePage {
         this.myStorage.get("trackerMeta").then((trackerMeta) => {
           let uuid = UUID.UUID();
           trackerMeta[uuid] = createTrackerData
-          this.myStorage.set("trackerMeta", trackerMeta);
+          this.myStorage.set("trackerMeta", trackerMeta).then(() => {
+            this.loadList();
+          });
         });
       });
     });
     createTrackerModal.present();
   }
 
+  loadList() {
+    this.trackers = [];
+    this.myStorage.ready().then(() => {
+      this.myStorage.get("trackerMeta").then((trackerMeta) => {
+        if( trackerMeta == undefined) {
+          this.myStorage.set("trackerMeta", {});
+        } else {
+          for(var tracker in trackerMeta) {
+            this.trackers.push(trackerMeta[tracker]);
+          }
+        }
+      });
+    });
+  }
 }
