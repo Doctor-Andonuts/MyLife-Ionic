@@ -9,11 +9,11 @@ import { NavController, ViewController } from 'ionic-angular';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-create-tracker',
-  templateUrl: 'create-tracker.html'
+  selector: 'page-tracker-create',
+  templateUrl: 'tracker-create.html'
 })
-export class CreateTrackerPage {
-  private createTracker: FormGroup;
+export class TrackerCreatePage {
+  private trackerCreate: FormGroup;
   tracker: any;
 
   constructor(
@@ -21,7 +21,7 @@ export class CreateTrackerPage {
     public viewCtrl: ViewController,
     private formBuilder: FormBuilder
   ) {
-    this.createTracker = this.formBuilder.group({
+    this.trackerCreate = this.formBuilder.group({
       name: ['', Validators.required],
       type: ['', Validators.required],
       label: ['', Validators.required]
@@ -34,9 +34,9 @@ export class CreateTrackerPage {
 
   submitForm() {
     this.tracker = {
-      "name": this.createTracker.value.name,
-      "label": this.createTracker.value.label,
-      "type": this.createTracker.value.type };
+      "name": this.trackerCreate.value.name,
+      "label": this.trackerCreate.value.label,
+      "type": this.trackerCreate.value.type };
 
     this.viewCtrl.dismiss(this.tracker);
 

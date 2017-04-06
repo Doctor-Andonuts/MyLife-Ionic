@@ -2,7 +2,8 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { CreateTrackerPage } from '../pages/create-tracker/create-tracker';
+import { TrackerCreatePage } from '../pages/tracker-create/tracker-create';
+import { TrackerDetailPage } from '../pages/tracker-detail/tracker-detail';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -12,7 +13,8 @@ import { IonicStorageModule } from '@ionic/storage';
   declarations: [
     MyApp,
     HomePage,
-    CreateTrackerPage
+    TrackerCreatePage,
+    TrackerDetailPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -22,7 +24,8 @@ import { IonicStorageModule } from '@ionic/storage';
   entryComponents: [
     MyApp,
     HomePage,
-    CreateTrackerPage
+    TrackerCreatePage,
+    TrackerDetailPage
   ],
   providers: [
     StatusBar,

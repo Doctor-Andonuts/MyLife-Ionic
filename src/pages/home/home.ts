@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 
 import { NavController, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { CreateTrackerPage } from '../create-tracker/create-tracker';
+import { TrackerCreatePage } from '../tracker-create/tracker-create';
+import { TrackerDetailPage } from '../tracker-detail/tracker-detail';
 import { UUID } from 'angular2-uuid';
 
 
@@ -12,42 +13,39 @@ import { UUID } from 'angular2-uuid';
 })
 export class HomePage {
   trackers: any[];
-  myStorage: any;
 
   constructor(
     public navCtrl: NavController,
     public modalCtrl: ModalController,
-    storage: Storage
+    public storage: Storage
   ) {
-    this.myStorage = storage;
-    
     console.log("==========START==============");
 
     this.loadList();
   }
 
   createTracker() {
-    let createTrackerModal = this.modalCtrl.create(CreateTrackerPage);
-    createTrackerModal.onDidDismiss(createTrackerData => {
-      this.myStorage.ready().then(() => {
-        this.myStorage.get("trackerMeta").then((trackerMeta) => {
+    let trackerCreateModal = this.modalCtrl.create(TrackerCreatePage);
+    trackerCreateModal.onDidDismiss(trackerCreateData => {
+      this.storage.ready().then(() => {
+        this.storage.get("trackerMeta").then((trackerMeta) => {
           let uuid = UUID.UUID();
-          trackerMeta[uuid] = createTrackerData
-          this.myStorage.set("trackerMeta", trackerMeta).then(() => {
+          trackerMeta[uuid] = trackerCreateData
+          this.storage.set("trackerMeta", trackerMeta).then(() => {
             this.loadList();
           });
         });
       });
     });
-    createTrackerModal.present();
+    trackerCreateModal.present();
   }
 
   loadList() {
     this.trackers = [];
-    this.myStorage.ready().then(() => {
-      this.myStorage.get("trackerMeta").then((trackerMeta) => {
+    this.storage.ready().then(() => {
+      this.storage.get("trackerMeta").then((trackerMeta) => {
         if( trackerMeta == undefined) {
-          this.myStorage.set("trackerMeta", {});
+          this.storage.set("trackerMeta", {});
         } else {
           for(var tracker in trackerMeta) {
             this.trackers.push(trackerMeta[tracker]);
@@ -55,5 +53,9 @@ export class HomePage {
         }
       });
     });
+  }
+
+  itemSelected(tracker) {
+    this.navCtrl.push(TrackerDetailPage, {tracker: tracker});
   }
 }

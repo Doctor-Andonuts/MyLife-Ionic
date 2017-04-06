@@ -1,5 +1,5 @@
 <!--
-  Generated template for the CreateTracker page.
+  Generated template for the TrackerCreate page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>createTracker</ion-title>
+    <ion-title>Create Tracker</ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
         <ion-icon name="md-close"></ion-icon>
@@ -20,7 +20,7 @@
 
 <ion-content padding>
 
-  <form [formGroup]="createTracker" (ngSubmit)="submitForm()">
+  <form [formGroup]="trackerCreate" (ngSubmit)="submitForm()">
     <ion-item>
       <ion-label>Name</ion-label>
       <ion-input formControlName="name" type="text"></ion-input>
@@ -44,6 +44,6 @@
       <ion-input formControlName="label" type="text"></ion-input>
     </ion-item>
 
-    <button ion-button type="submit" [disabled]="!createTracker.valid">Create Tracker</button>
+    <button ion-button type="submit" [disabled]="!trackerCreate.valid">Create Tracker</button>
   </form>
 </ion-content>

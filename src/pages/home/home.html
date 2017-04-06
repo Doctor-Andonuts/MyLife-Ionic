@@ -9,7 +9,7 @@
 <ion-content padding>
 
   <ion-list>
-    <button ion-item *ngFor="let tracker of trackers">
+    <button ion-item *ngFor="let tracker of trackers" (click)="itemSelected(tracker)">
       {{ tracker.name }}
     </button>
   </ion-list>
