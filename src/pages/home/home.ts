@@ -27,15 +27,17 @@ export class HomePage {
   createTracker() {
     let trackerCreateModal = this.modalCtrl.create(TrackerCreatePage);
     trackerCreateModal.onDidDismiss(trackerCreateData => {
-      this.storage.ready().then(() => {
-        this.storage.get("trackerMeta").then((trackerMeta) => {
-          let uuid = UUID.UUID();
-          trackerMeta[uuid] = trackerCreateData
-          this.storage.set("trackerMeta", trackerMeta).then(() => {
-            this.loadList();
+      if (trackerCreateData != undefined) {
+        this.storage.ready().then(() => {
+          this.storage.get("trackerMeta").then((trackerMeta) => {
+            let uuid = UUID.UUID();
+            trackerMeta[uuid] = trackerCreateData
+            this.storage.set("trackerMeta", trackerMeta).then(() => {
+              this.loadList();
+            });
           });
         });
-      });
+      }
     });
     trackerCreateModal.present();
   }
@@ -47,12 +49,17 @@ export class HomePage {
         if( trackerMeta == undefined) {
           this.storage.set("trackerMeta", {});
         } else {
-          for(var tracker in trackerMeta) {
-            this.trackers.push(trackerMeta[tracker]);
-          }
+          Object.keys(trackerMeta).forEach(uuid => {
+            console.log(trackerMeta[uuid]);
+            if (trackerMeta[uuid] != undefined) {
+              trackerMeta[uuid]["uuid"] = uuid;
+              this.trackers.push(trackerMeta[uuid]);
+            }
+          });
         }
       });
     });
+    console.log(this.trackers);
   }
 
   itemSelected(tracker) {

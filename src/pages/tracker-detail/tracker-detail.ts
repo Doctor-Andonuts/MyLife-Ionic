@@ -17,4 +17,8 @@ export class TrackerDetailPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.tracker = navParams.get('tracker');
   }
+
+  deleteTracker(uuid) {
+    alert('delete tracker: ' + uuid);
+  }
 }
