@@ -20,8 +20,6 @@ export class HomePage {
     public storage: Storage
   ) {
     console.log("==========START==============");
-
-    this.loadList();
   }
 
   createTracker() {
@@ -50,7 +48,6 @@ export class HomePage {
           this.storage.set("trackerMeta", {});
         } else {
           Object.keys(trackerMeta).forEach(uuid => {
-            console.log(trackerMeta[uuid]);
             if (trackerMeta[uuid] != undefined) {
               trackerMeta[uuid]["uuid"] = uuid;
               this.trackers.push(trackerMeta[uuid]);
@@ -64,5 +61,9 @@ export class HomePage {
 
   itemSelected(tracker) {
     this.navCtrl.push(TrackerDetailPage, {tracker: tracker});
+  }
+
+  ionViewDidEnter() {
+    this.loadList()
   }
 }

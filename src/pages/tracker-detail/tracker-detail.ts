@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 /*
   Generated class for the TrackerDetail page.
@@ -14,11 +15,21 @@ import { NavController, NavParams } from 'ionic-angular';
 export class TrackerDetailPage {
   tracker: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public storage: Storage) {
     this.tracker = navParams.get('tracker');
   }
 
   deleteTracker(uuid) {
-    alert('delete tracker: ' + uuid);
-  }
+    this.storage.ready().then(() => {
+      this.storage.get("trackerMeta").then((trackerMeta) => {
+        delete(trackerMeta[uuid]);
+        this.storage.set("trackerMeta", trackerMeta).then(() => {
+          this.navCtrl.pop();
+        });
+      });
+    });
+  }s
 }
