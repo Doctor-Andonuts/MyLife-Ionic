@@ -4,6 +4,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TrackerCreatePage } from '../pages/tracker-create/tracker-create';
 import { TrackerDetailPage } from '../pages/tracker-detail/tracker-detail';
+import { EntryCreatePage } from '../pages/entry-create/entry-create';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -14,7 +15,8 @@ import { IonicStorageModule } from '@ionic/storage';
     MyApp,
     HomePage,
     TrackerCreatePage,
-    TrackerDetailPage
+    TrackerDetailPage,
+    EntryCreatePage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -25,7 +27,8 @@ import { IonicStorageModule } from '@ionic/storage';
     MyApp,
     HomePage,
     TrackerCreatePage,
-    TrackerDetailPage
+    TrackerDetailPage,
+    EntryCreatePage
   ],
   providers: [
     StatusBar,

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { EntryCreatePage } from '../entry-create/entry-create';
 
 /*
   Generated class for the TrackerDetail page.
@@ -18,6 +19,7 @@ export class TrackerDetailPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public modalCtrl: ModalController,
     public storage: Storage) {
     this.tracker = navParams.get('tracker');
   }
@@ -35,5 +37,26 @@ export class TrackerDetailPage {
         });
       });
     });
-  }s
+  }
+
+  addEntry() {
+    let entryCreateModal = this.modalCtrl.create(EntryCreatePage);
+    entryCreateModal.onDidDismiss(entryCreateData => {
+      console.log(entryCreateData)
+      //   if (trackerCreateData != undefined) {
+      //     this.storage.ready().then(() => {
+      //       this.storage.get("trackerMeta").then((trackerMeta) => {
+      //         let uuid = UUID.UUID();
+      //         trackerCreateData["uuid"] = uuid;
+      //         trackerMeta.push(trackerCreateData);
+      //
+      //         this.storage.set("trackerMeta", trackerMeta).then(() => {
+      //           this.loadList();
+      //         });
+      //       });
+      //     });
+      //   }
+    });
+    entryCreateModal.present();
+  }
 }
