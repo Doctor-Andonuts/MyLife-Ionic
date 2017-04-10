@@ -29,7 +29,9 @@ export class HomePage {
         this.storage.ready().then(() => {
           this.storage.get("trackerMeta").then((trackerMeta) => {
             let uuid = UUID.UUID();
-            trackerMeta[uuid] = trackerCreateData
+            trackerCreateData["uuid"] = uuid;
+            trackerMeta.push(trackerCreateData);
+
             this.storage.set("trackerMeta", trackerMeta).then(() => {
               this.loadList();
             });
@@ -45,18 +47,12 @@ export class HomePage {
     this.storage.ready().then(() => {
       this.storage.get("trackerMeta").then((trackerMeta) => {
         if( trackerMeta == undefined) {
-          this.storage.set("trackerMeta", {});
+          this.storage.set("trackerMeta", []);
         } else {
-          Object.keys(trackerMeta).forEach(uuid => {
-            if (trackerMeta[uuid] != undefined) {
-              trackerMeta[uuid]["uuid"] = uuid;
-              this.trackers.push(trackerMeta[uuid]);
-            }
-          });
+          this.trackers = trackerMeta;
         }
       });
     });
-    console.log(this.trackers);
   }
 
   itemSelected(tracker) {

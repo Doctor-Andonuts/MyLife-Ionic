@@ -25,7 +25,11 @@ export class TrackerDetailPage {
   deleteTracker(uuid) {
     this.storage.ready().then(() => {
       this.storage.get("trackerMeta").then((trackerMeta) => {
-        delete(trackerMeta[uuid]);
+        for (var i = 0; i < trackerMeta.length; i++) {
+          if (trackerMeta[i].uuid == uuid) {
+            trackerMeta.splice(i, 1);
+          }
+        }
         this.storage.set("trackerMeta", trackerMeta).then(() => {
           this.navCtrl.pop();
         });
